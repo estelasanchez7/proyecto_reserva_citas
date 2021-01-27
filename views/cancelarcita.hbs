@@ -1,0 +1,37 @@
+{{#if mensaje}}
+<div class="alert alert-success" role="alert">
+    {{mensaje}}
+</div>
+{{/if}}
+<form method="post" action="/citas/cancelarcita">
+    <div class="form-group">
+        <label class="control-label requiredField" for="email">
+            <h3>Para cancelar tu cita necesitas tu email</h3><span class="asteriskField"></span>
+        </label>
+        <input class="form-control" id="email" name="email" type="text" placeholder="Introduce tu email"
+            autocomplete="off" required />
+    </div>
+    <div class="form-group">
+        <div>
+            <button class="btn btn-outline-dark" name="submit" type="submit" value="Ecriptar mensaje">Mis citas</button>
+        </div>
+    </div>
+</form>
+
+
+{{#each citas}}
+<div class="alert alert-danger" style="color:red;">
+    <ul style="list-style-type: none">
+        <li>Nombre: {{nombre}}</li>
+        <li>Email: {{email}}</li>
+        <li>Tel: {{telefono}}</li>
+        <li>Fecha: {{fecha}}</li>
+        <li>Hora: {{hora}}</li>
+        <li>Id: {{uuid}}</li>
+    </ul>
+    <div style="text-align: center;">
+        <a method="get" id="borrar" href="/citas/delete/{{uuid}}" style="color:rgb(46, 44, 44); text-align:center"><i
+                class="far fa-trash-alt"></i></a>
+    </div>
+</div>
+{{/each}}

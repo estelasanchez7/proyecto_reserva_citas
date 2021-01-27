@@ -1,0 +1,37 @@
+<form class="form-group" method="post" action="/citas/modificar">
+    <p>Id:<input type="text" name="id" class="form-control"></p>
+    <p><input type="button" id="btn-buscar" class="btn btn-outline-success" value="Buscar"></p>
+
+
+    <p>Nombre:<input type="text" name="nombre" disabled class="form-control"></p>
+    <p>Teléfono:<input type="number" name="telefono" disabled class="form-control"></p>
+    <p>Email:<input type="email" name="telefono" disabled class="form-control"></p>
+    <p>Fecha:<input type="date" name="fecha" class="form-control"></p>
+    <p>Hora:<input type="time" name="hora" class="form-control"></p>
+
+    <p><input type="button" id="btn-save" class="btn btn-outline-dark" value="Guardar"></p>
+</form>
+
+<script>
+    let id = document.querySelector("input[name='id']")
+    let nombre = document.querySelector("input[name='nombre']")
+    let telefono = document.querySelector("input[name='telefono']")
+    let email = document.querySelector("input[name='email']")
+    let fecha = document.querySelector("input[name='fecha']")
+    let hora = document.querySelector("input[name='hora']")
+    let btnBuscar = document.querySelector("#btn-buscar")
+
+
+    //funcion ajax
+    btnBuscar.onclick = () => {
+        fetch(`/citas/cita/${id.value}`)
+            .then(res => res.json())
+            .then(cita => {
+                nombre.value = cita.nombre
+                telefono.value = cita.telefono
+                email.value = cita.email
+                fecha.value = cita.fecha
+                hora.value = cita.hora
+            })
+    }
+</script>

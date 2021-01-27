@@ -1,0 +1,29 @@
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-flex resultado justify-content-left align-items-center">
+                    <form class="form-group" method="post" action="/citas/buscarcita">
+                        <label for="email"><h3>Para recordar los datos de tu cita necesitas tu email</h3></label>
+                        <input type="email" name="email" placeholder="Introduce tu email" class="form-control" required> <br>
+                        <input type="submit" value="Buscar mi cita" class="btn btn-outline-dark">
+                    </form>
+                </div>
+            </div>
+
+            {{message}}
+
+
+            {{#each citasencontradas}}
+            <div class="alert alert-danger" style="color:red;">
+                <ul style="list-style-type: none">
+                    <li>Nombre: {{nombre}}</li>
+                    <li>Email: {{email}}</li>
+                    <li>Tel: {{telefono}}</li>
+                    <li>Fecha: {{fecha}}</li>
+                    <li>Hora: {{hora}}</li>
+                    <li>Id: {{uuid}}</li>
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        

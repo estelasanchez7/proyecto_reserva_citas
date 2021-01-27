@@ -1,0 +1,29 @@
+<!-- CUERPO DEL EJERCICIO -->
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 d-block resultado justify-content-center align-items-center">
+        <h3>¡La reserva se ha realizado con éxito!</h3> <br>
+        <h3>Estos son los datos de su cita:</h3>
+        <h3>Nombre: {{newCita.nombre}}</h3>
+        <h3>Teléfono: {{newCita.telefono}}</h3>
+        <h3>Email: {{newCita.email}}</h3>
+        <h3>Fecha: {{newCita.fecha}}</h3>
+        <h3>Hora: {{newCita.hora}}</h3>
+        <h3>Id: {{newCita.uuid}}</h3>
+
+      </div>
+      <div class="col-12 d-flex resultado justify-content-center align-items-center">
+        <h3>Éste es su código Qr dónde puede ver la información de su cita:  </h3>
+        <canvas id="canvas"></canvas>
+        <script src="/js/qrcode/build/qrcode.min.js"></script>
+        <script>
+          QRCode.toCanvas(document.getElementById('canvas'), `Este es tu {{newCita.uuid}}`
+            , function (error) {
+              if (error) console.error(error)
+            })
+        </script>
+      </div>
+    </div>
+  </div>
+</main>

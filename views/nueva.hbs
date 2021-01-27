@@ -1,0 +1,71 @@
+<div>
+  {{#if errores}}
+  <p>Hay errores en el formulario</p>
+  <ul>
+    {{#each errores}}
+    <li style="color: red;">{{error}}</li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</div>
+<form class="form-group" method="post" action="/citas/guardar">
+  <label for="nombre">Nombre</label>
+  <input type="text" name="nombre" placeholder="Introduce tu nombre" class="form-control"> <br>
+  <label for="telefono">Telefono</label>
+  <input type="text" name="telefono" placeholder="Introduce tu telefono" class="form-control"><br>
+  <label for="email">Email</label>
+  <input type="email" name="email" placeholder="Introduce tu email" class="form-control"><br>
+  <label for="fecha">Selecciona un día para tu cita</label>
+  <div class="row">
+    <div class="col-8">
+      <input type="text" name="fecha" id="calendario">
+    </div>
+  </div>
+
+  <!-- IMPLEMENTACIÓN DE FLATPICKR -->
+  <!-- https://flatpickr.js.org/instance-methods-properties-elements/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <script>
+    const myInput = document.querySelector("#calendario");
+    const fp = flatpickr(myInput, {
+      inline: true,
+      disable: ["2021-01-01", "2021-01-06", "2021-04-02", "2021-05-01", "2021-10-12", "2021-11-01", "2021-12-06", "2021-12-08", "2021-12-25",
+        function (date) {
+          return (date.getDay() === 0 || date.getDay() === 6);
+
+        }
+      ],
+      locale: {
+        firstDayOfWeek: 1,
+        weekdays: {
+          shorthand: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+          longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        },
+        months: {
+          shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+          longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        },
+      },
+
+    });
+  </script>
+  <br>
+  <label for="hora">Hora de reserva:</label>
+  <select class="custom-select" name="hora" id="hora"> <br>
+  <option selected>Selecciona la hora de tu cita</option>
+  <option value="9:00">9:00</option>
+  <option value="10:00">10:00</option>
+  <option value="11:00">11:00</option>
+  <option value="12:00">12:00</option>
+  <option value="16:00">16:00</option>
+  <option value="17:00">17:00</option>
+  </select> <br> <br>
+
+  <input type="submit" value="Reservar" class="btn btn-outline-danger">
+</form>
+{{message}}
+
+<!--Calendario-->
